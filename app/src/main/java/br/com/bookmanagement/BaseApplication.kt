@@ -1,6 +1,8 @@
 package br.com.bookmanagement
 
 import android.app.Application
+import br.com.bookmanagement.di.DataModule
+import br.com.bookmanagement.di.DatabaseModule
 import br.com.bookmanagement.di.NetworkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,7 +15,9 @@ class BaseApplication : Application() {
             androidLogger()
             androidContext(this@BaseApplication)
             modules(
-                NetworkModule.module
+                NetworkModule.module,
+                DatabaseModule.module,
+                DataModule.module
             )
         }
         super.onCreate()
