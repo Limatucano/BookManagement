@@ -1,4 +1,4 @@
-ipackage br.com.bookmanagement
+package br.com.bookmanagement
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
