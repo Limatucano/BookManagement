@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.composeCompiler)
+    id("com.google.devtools.ksp") version "2.0.21-1.0.25"
 }
 
 android {
@@ -40,8 +42,8 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+    composeCompiler {
+        enableStrongSkippingMode = true
     }
     packaging {
         resources {
@@ -51,6 +53,8 @@ android {
 }
 
 dependencies {
+    annotationProcessor(libs.roomCompiler)
+    ksp(libs.roomCompiler)
     implementation(libs.bundles.commonLibs)
     androidTestImplementation(libs.bundles.testLibs)
     implementation(libs.bundles.composeLibs)
