@@ -1,13 +1,13 @@
 package br.com.bookmanagement.data.repository
 
+import br.com.bookmanagement.data.remote.datasource.RemoteDataSourceImpl
 import br.com.bookmanagement.data.remote.model.BooksDto
-import br.com.bookmanagement.data.remote.service.ApiService
 
 class BookRepository(
-    private val bookService: ApiService
+    private val bookService: RemoteDataSourceImpl
 ) : IBookRepository {
 
     override suspend fun getVolumes(query: String): BooksDto {
-        return bookService.getVolumes(query)
+        return bookService.getVolumesByTitle(query)
     }
 }
