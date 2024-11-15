@@ -1,0 +1,30 @@
+package br.com.bookmanagement.domain.usecase
+
+import br.com.bookmanagement.data.repository.BookRepository
+import br.com.bookmanagement.domain.mapper.toBooks
+import br.com.bookmanagement.domain.model.Books
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
+
+class ReaderManualUseCase(
+    private val repository: BookRepository
+) {
+
+    suspend fun getData(query: String): Flow<Result<Books>> {
+        return flow {
+            try {
+                emit(
+                    Result.success(
+                        repository.getVolumes(query).toBooks()
+                    )
+                )
+            } catch (ex: IOException) {
+                emit(Result.failure(ex))
+            } catch (ex: HttpException) {
+                emit(Result.failure(ex))
+            }
+        }
+    }
+}
