@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -5,6 +7,11 @@ plugins {
     alias(libs.plugins.composeCompiler)
     id("com.google.devtools.ksp") version "2.0.21-1.0.25"
 }
+
+val localProperties = Properties()
+file("../local.properties").inputStream().use { localProperties.load(it) }
+
+val apiToken = localProperties.getProperty("API_TOKEN")
 
 android {
     namespace = "br.com.bookmanagement"
@@ -21,6 +28,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "API_TOKEN", "\"$apiToken\"")
     }
 
     buildTypes {
@@ -41,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeCompiler {
         enableStrongSkippingMode = true
@@ -53,6 +62,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":design_system"))
+
     annotationProcessor(libs.roomCompiler)
     ksp(libs.roomCompiler)
     implementation(libs.bundles.commonLibs)

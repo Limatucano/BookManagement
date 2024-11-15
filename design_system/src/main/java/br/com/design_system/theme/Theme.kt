@@ -1,4 +1,4 @@
-package br.com.bookmanagement.ui.theme
+package br.com.design_system.theme
 
 import android.app.Activity
 import android.os.Build

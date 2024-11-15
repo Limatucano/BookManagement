@@ -14,6 +14,8 @@ okHttpInterceptor = "4.12.0"
 navigation = "2.8.0"
 retrofit = "2.9.0"
 room = "2.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
 
@@ -46,6 +48,8 @@ navigationCompose = { module = "androidx.navigation:navigation-compose", version
 roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
 roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidxAppcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [bundles]
 testLibs = [
@@ -59,6 +63,7 @@ composeLibs = [
 commonLibs = [
     "androidx-core-ktx", "androidx-lifecycle-runtime-ktx", "koinCoroutines", "koinCompose", "gson",
     "retrofit", "loggingInterceptor", "serialization", "navigationCompose", "roomRuntime", "roomKtx",
+    "material", "androidxAppcompat"
 ]
 
 [plugins]
@@ -66,3 +71,4 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }

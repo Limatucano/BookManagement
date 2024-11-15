@@ -1,5 +1,6 @@
 package br.com.bookmanagement.di
 
+import br.com.bookmanagement.data.remote.interceptor.TokenInterceptor
 import br.com.bookmanagement.data.remote.service.ApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -49,6 +50,7 @@ internal object NetworkModule: KoinModule {
 
     private fun provideInterceptors(): List<Interceptor> = listOf(
         provideHttpLoggingInterceptor(),
+        TokenInterceptor()
     )
 
     private fun provideBaseUrl() : String = "https://www.googleapis.com/books/v1/"
