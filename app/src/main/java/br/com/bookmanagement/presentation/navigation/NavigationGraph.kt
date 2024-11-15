@@ -16,7 +16,7 @@ internal fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BookRoute.SplashScreen.route
+        startDestination = BookRoute.ReaderManualScreen.route
     ) {
         composable(route = BookRoute.SplashScreen.route) {
             SplashScreen(navController = navController)

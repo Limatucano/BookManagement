@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("volumes")
-    fun getVolumes(
+    suspend fun getVolumes(
         @Query("q") query: String
     ): BooksDto
 

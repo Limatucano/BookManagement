@@ -18,7 +18,7 @@ abstract class BookTest {
     @get:Rule
     open val coroutineRule = CoroutinesMainTestRule()
 
-    private val dispatcher = StandardTestDispatcher()
+    protected val dispatcher = StandardTestDispatcher()
 
     fun coTest(
         context: CoroutineContext = dispatcher,

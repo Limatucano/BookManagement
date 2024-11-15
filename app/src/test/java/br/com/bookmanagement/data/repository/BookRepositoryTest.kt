@@ -21,34 +21,29 @@ class BookRepositoryTest : BookTest() {
     )
 
     @Test
-    fun `WHEN called the function getBooks THEN verify body is not null`() {
-        coTest {
-            coEvery { mockBookService.getVolumes(any()) } returns mockBook
-            val result = repository.getVolumes("")
+    fun `WHEN called the function getBooks THEN verify body is not null`() = coTest {
+        coEvery { mockBookService.getVolumes(any()) } returns mockBook
+        val result = repository.getVolumes("")
 
-            assertNotNull(result)
-        }
+        assertNotNull(result)
+    }
+
+
+    @Test
+    fun `WHEN called the function getBooks THEN verify body`() = coTest {
+        coEvery { mockBookService.getVolumes(any()) } returns mockBook
+
+        val result = repository.getVolumes("")
+
+        assertEquals(mockBook, result)
     }
 
     @Test
-    fun `WHEN called the function getBooks THEN verify body`() {
-        coTest {
-            coEvery { mockBookService.getVolumes(any()) } returns mockBook
+    fun `WHEN called the function getBooks THEN verify is called one time`() = coTest {
+        coEvery { mockBookService.getVolumes(any()) } returns mockBook
 
-            val result = repository.getVolumes("")
+        repository.getVolumes("")
 
-            assertEquals(mockBook, result)
-        }
-    }
-
-    @Test
-    fun `WHEN called the function getBooks THEN verify is called one time`() {
-        coTest {
-            coEvery { mockBookService.getVolumes(any()) } returns mockBook
-
-            repository.getVolumes("")
-
-            coVerify(exactly = 1) { repository.getVolumes(any()) }
-        }
+        coVerify(exactly = 1) { repository.getVolumes(any()) }
     }
 }
