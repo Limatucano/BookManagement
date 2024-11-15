@@ -3,7 +3,6 @@ package br.com.bookmanagement.data.repository
 import br.com.bookmanagement.core.BookTest
 import br.com.bookmanagement.data.remote.datasource.RemoteDataSourceImpl
 import br.com.bookmanagement.data.remote.model.BooksDto
-import br.com.bookmanagement.data.remote.service.ApiService
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -24,7 +23,7 @@ class BookRepositoryTest : BookTest() {
     @Test
     fun `WHEN called the function getBooks THEN verify body is not null`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
-        val result = repository.getVolumes("")
+        val result = repository.getVolumesByTitle("")
 
         assertNotNull(result)
     }
@@ -34,7 +33,7 @@ class BookRepositoryTest : BookTest() {
     fun `WHEN called the function getBooks THEN verify body`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
 
-        val result = repository.getVolumes("")
+        val result = repository.getVolumesByTitle("")
 
         assertEquals(mockBook, result)
     }
@@ -43,8 +42,8 @@ class BookRepositoryTest : BookTest() {
     fun `WHEN called the function getBooks THEN verify is called one time`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
 
-        repository.getVolumes("")
+        repository.getVolumesByTitle("")
 
-        coVerify(exactly = 1) { repository.getVolumes(any()) }
+        coVerify(exactly = 1) { repository.getVolumesByTitle(any()) }
     }
 }

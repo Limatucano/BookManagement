@@ -4,6 +4,6 @@ import br.com.bookmanagement.data.remote.model.BooksDto
 
 interface IBookRepository {
 
-    suspend fun getVolumes(query: String): BooksDto
+    suspend fun getVolumesByTitle(query: String): BooksDto
 
 }

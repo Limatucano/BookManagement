@@ -34,7 +34,7 @@ class ReaderManualUseCaseTest : BookTest() {
         )
 
         coEvery {
-            repository.getVolumes(query)
+            repository.getVolumesByTitle(query)
         } returns books
 
         val result = useCase.getData(query).first()
@@ -48,7 +48,7 @@ class ReaderManualUseCaseTest : BookTest() {
         val ioException = IOException("Network error")
 
         coEvery {
-            repository.getVolumes(query)
+            repository.getVolumesByTitle(query)
         } throws ioException
 
         val result = useCase.getData(query).first()
@@ -62,7 +62,7 @@ class ReaderManualUseCaseTest : BookTest() {
         val httpException = mockk<HttpException>()
 
         coEvery {
-            repository.getVolumes(query)
+            repository.getVolumesByTitle(query)
         } throws httpException
 
         val result = useCase.getData(query).first()

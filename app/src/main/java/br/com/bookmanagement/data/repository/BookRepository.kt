@@ -7,7 +7,7 @@ class BookRepository(
     private val bookService: RemoteDataSourceImpl
 ) : IBookRepository {
 
-    override suspend fun getVolumes(query: String): BooksDto {
+    override suspend fun getVolumesByTitle(query: String): BooksDto {
         return bookService.getVolumesByTitle(query)
     }
 }

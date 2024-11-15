@@ -17,7 +17,7 @@ class ReaderManualUseCase(
             try {
                 emit(
                     Result.success(
-                        repository.getVolumes(query).toBooks()
+                        repository.getVolumesByTitle(query).toBooks()
                     )
                 )
             } catch (ex: IOException) {
