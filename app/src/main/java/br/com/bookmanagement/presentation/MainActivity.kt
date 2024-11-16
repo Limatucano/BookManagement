@@ -29,14 +29,8 @@ class MainActivity : ComponentActivity() {
             BookManagementTheme {
                 val navController = rememberNavController()
 
-                CallNavigation(navController = navController)
+                NavigationGraph(navController = navController)
             }
         }
     }
-
-    @Composable
-    private fun CallNavigation(navController: NavHostController) {
-        NavigationGraph(navController = navController)
-    }
-
 }

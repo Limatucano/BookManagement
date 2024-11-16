@@ -2,7 +2,7 @@ package br.com.bookmanagement.domain.usecase
 
 import br.com.bookmanagement.core.BookTest
 import br.com.bookmanagement.data.remote.model.BooksDto
-import br.com.bookmanagement.data.repository.BookRepository
+import br.com.bookmanagement.data.repository.BookRepositoryImpl
 import br.com.bookmanagement.domain.mapper.toBooks
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -17,7 +17,7 @@ import java.io.IOException
 class ReaderManualUseCaseTest : BookTest() {
 
     private lateinit var useCase: ReaderManualUseCase
-    private lateinit var repository: BookRepository
+    private lateinit var repository: BookRepositoryImpl
 
     @Before
     fun setUp() {
