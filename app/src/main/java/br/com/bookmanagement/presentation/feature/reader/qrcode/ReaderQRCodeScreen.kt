@@ -12,8 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import br.com.bookmanagement.presentation.model.BottomNavHomeItems
+import br.com.design_system.components.atomic.organism.ScaffoldOrganism
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -46,7 +49,10 @@ fun ReaderQRCodeScreen(
         }
 
         is QRCodeUiState.OpenQRCode -> {
-            OpenQRCode(viewModel)
+            OpenQRCode(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
     }
 
@@ -54,9 +60,10 @@ fun ReaderQRCodeScreen(
 
 @kotlin.OptIn(ExperimentalPermissionsApi::class)
 @Composable
-private fun OpenQRCode(viewModel: ReaderQRCodeViewModel) {
-
-
+private fun OpenQRCode(
+    viewModel: ReaderQRCodeViewModel,
+    navController: NavController
+) {
     var openQRCodeReader by remember {
         mutableStateOf(false)
     }
@@ -96,16 +103,20 @@ private fun OpenQRCode(viewModel: ReaderQRCodeViewModel) {
     //Até aqui
 
     if (openQRCodeReader) {
-        QRCodeReader(
-            hasCameraPermission = cameraPermission.status.isGranted,
-            buttonText = "Ler QRCode"
-        ) { result ->
-            if (result.isNotEmpty() && result != qrCodeResult && !isQRCodeRead) {
-                viewModel.fetchData(result)
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+        ScaffoldOrganism(
+            navController = navController,
+            items = BottomNavHomeItems.getAll()
+        ) {
+            QRCodeReader(
+                hasCameraPermission = cameraPermission.status.isGranted
+            ) { result ->
+                if (result.isNotEmpty() && result != qrCodeResult && !isQRCodeRead) {
+                    viewModel.fetchData(result)
+                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
 
-                isQRCodeRead = true
-                qrCodeResult = result
+                    isQRCodeRead = true
+                    qrCodeResult = result
+                }
             }
         }
     }

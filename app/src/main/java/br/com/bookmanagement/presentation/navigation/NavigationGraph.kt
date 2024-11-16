@@ -16,13 +16,16 @@ internal fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BookRoute.ReaderQRCodeScreen.route
+        startDestination = BookRoute.HomeScreen.route
     ) {
         composable(route = BookRoute.SplashScreen.route) {
             SplashScreen(navController = navController)
         }
 
-        composable(route = BookRoute.HomeScreen.route) {
+        composable(
+            route = BookRoute.HomeScreen.route,
+            popEnterTransition = null
+        ) {
             HomeScreen(navController = navController)
         }
 
@@ -34,7 +37,10 @@ internal fun NavigationGraph(
             ReaderQRCodeScreen(navController = navController)
         }
 
-        composable(route = BookRoute.ReaderManualScreen.route) {
+        composable(
+            route = BookRoute.ReaderManualScreen.route,
+            popEnterTransition = null
+        ) {
             ReaderManualScreen(navController = navController)
         }
     }

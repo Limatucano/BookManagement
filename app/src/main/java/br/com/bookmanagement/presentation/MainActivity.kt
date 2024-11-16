@@ -20,7 +20,9 @@ class MainActivity : ComponentActivity() {
             BookManagementTheme {
                 val navController = rememberNavController()
 
-                NavigationGraph(navController = navController)
+                NavigationGraph(
+                    navController = navController
+                )
             }
         }
     }
