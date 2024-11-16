@@ -110,7 +110,6 @@ internal class QRCodeCamera {
                         Barcode.FORMAT_CODE_93,
                         Barcode.FORMAT_EAN_8,
                         Barcode.FORMAT_EAN_13,
-                        Barcode.FORMAT_QR_CODE,
                         Barcode.FORMAT_UPC_A,
                         Barcode.FORMAT_UPC_E,
                         Barcode.FORMAT_PDF417,

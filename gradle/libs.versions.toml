@@ -24,7 +24,6 @@ room = "2.6.1"
 [libraries]
 
 # test
-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -39,6 +38,7 @@ androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.r
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraxVersion" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraxVersion" }
 barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "barcodeScanning" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 
 # compose
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -75,6 +75,8 @@ composeLibs = [
 commonLibs = [
     "androidx-core-ktx", "androidx-lifecycle-runtime-ktx", "koinCoroutines", "koinCompose", "gson",
     "retrofit", "loggingInterceptor", "serialization", "navigationCompose", "roomRuntime", "roomKtx",
+    "accompanist-permissions", "androidx-camera-camera2", "androidx-camera-lifecycle", "androidx-camera-view",
+    "barcode-scanning"
 ]
 
 [plugins]
