@@ -1,8 +1,8 @@
-package br.com.bookmanagement.presentation.feature.reader.manual
+package br.com.bookmanagement.presentation.feature.reader.qrcode
 
 import br.com.bookmanagement.core.BookTest
 import br.com.bookmanagement.domain.model.Books
-import br.com.bookmanagement.domain.usecase.ReaderManualUseCase
+import br.com.bookmanagement.domain.usecase.ReaderQRCodeUseCase
 import br.com.bookmanagement.presentation.BookManagementUiState
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -12,10 +12,10 @@ import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.flow
 import org.junit.Test
 
-class ReaderManualViewModelTest : BookTest() {
+class ReaderQRCodeViewModelTest : BookTest() {
 
-    private val mockUseCase = mockk<ReaderManualUseCase>(relaxed = true)
-    private val viewModel = ReaderManualViewModel(mockUseCase)
+    private val mockUseCase = mockk<ReaderQRCodeUseCase>(relaxed = true)
+    private val viewModel = ReaderQRCodeViewModel(mockUseCase)
     private val mockBooks = Books(23, listOf())
 
     @Test
@@ -24,8 +24,8 @@ class ReaderManualViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertNotNull((viewModel.readerManualState.value as BookManagementUiState.Success<*>).item)
-        assertEquals(mockBooks, (viewModel.readerManualState.value as BookManagementUiState.Success<*>).item)
+        assertNotNull((viewModel.readerQRCodeState.value as QRCodeUiState.Success).item)
+        assertEquals(mockBooks, (viewModel.readerQRCodeState.value as QRCodeUiState.Success).item)
     }
 
     @Test
@@ -35,14 +35,14 @@ class ReaderManualViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerManualState.value is BookManagementUiState.Error)
-        assertEquals(expectedError, (viewModel.readerManualState.value as BookManagementUiState.Error).throwable)
+        assertTrue(viewModel.readerQRCodeState.value is QRCodeUiState.Error)
+        assertEquals(expectedError, (viewModel.readerQRCodeState.value as QRCodeUiState.Error).throwable)
     }
 
     @Test
     fun `should set loading state while fetching`() = coTest {
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerManualState.value is BookManagementUiState.Loading)
+        assertTrue(viewModel.readerQRCodeState.value is QRCodeUiState.Loading)
     }
 }

@@ -21,16 +21,15 @@ class BookRepositoryTest : BookTest() {
     )
 
     @Test
-    fun `WHEN called the function getBooks THEN verify body is not null`() = coTest {
+    fun `WHEN called the function getVolumesByTitle THEN verify body is not null`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
         val result = repository.getVolumesByTitle("")
 
         assertNotNull(result)
     }
 
-
     @Test
-    fun `WHEN called the function getBooks THEN verify body`() = coTest {
+    fun `WHEN called the function getVolumesByTitle THEN verify body`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
 
         val result = repository.getVolumesByTitle("")
@@ -39,11 +38,37 @@ class BookRepositoryTest : BookTest() {
     }
 
     @Test
-    fun `WHEN called the function getBooks THEN verify is called one time`() = coTest {
+    fun `WHEN called the function getVolumesByTitle THEN verify is called one time`() = coTest {
         coEvery { mockBookService.getVolumesByTitle(any()) } returns mockBook
 
         repository.getVolumesByTitle("")
 
-        coVerify(exactly = 1) { repository.getVolumesByTitle(any()) }
+        coVerify(exactly = 1) { mockBookService.getVolumesByTitle(any()) }
+    }
+
+    @Test
+    fun `WHEN called the function getVolumesByIsbn THEN verify body is not null`() = coTest {
+        coEvery { mockBookService.getVolumesByIsbn(any()) } returns mockBook
+        val result = repository.getVolumesByIsbn("")
+
+        assertNotNull(result)
+    }
+
+    @Test
+    fun `WHEN called the function getVolumesByIsbn THEN verify body`() = coTest {
+        coEvery { mockBookService.getVolumesByIsbn(any()) } returns mockBook
+
+        val result = repository.getVolumesByIsbn("")
+
+        assertEquals(mockBook, result)
+    }
+
+    @Test
+    fun `WHEN called the function getVolumesByIsbn THEN verify is called one time`() = coTest {
+        coEvery { mockBookService.getVolumesByIsbn(any()) } returns mockBook
+
+        repository.getVolumesByIsbn("")
+
+        coVerify(exactly = 1) { mockBookService.getVolumesByIsbn(any()) }
     }
 }

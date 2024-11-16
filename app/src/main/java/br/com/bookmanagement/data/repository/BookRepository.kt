@@ -10,4 +10,8 @@ class BookRepository(
     override suspend fun getVolumesByTitle(query: String): BooksDto {
         return bookService.getVolumesByTitle(query)
     }
+
+    override suspend fun getVolumesByIsbn(query: String): BooksDto {
+        return bookService.getVolumesByIsbn(query)
+    }
 }

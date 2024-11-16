@@ -16,7 +16,7 @@ internal fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BookRoute.ReaderManualScreen.route
+        startDestination = BookRoute.ReaderQRCodeScreen.route
     ) {
         composable(route = BookRoute.SplashScreen.route) {
             SplashScreen(navController = navController)
