@@ -27,7 +27,7 @@ fun ReaderQRCodeScreen(
     viewModel: ReaderQRCodeViewModel = koinViewModel()
 ) {
 
-    val state by viewModel.readerQRCodeState.collectAsState()
+    val state by viewModel.uiState.collectAsState()
 
     when (state) {
         is QRCodeUiState.Success -> {

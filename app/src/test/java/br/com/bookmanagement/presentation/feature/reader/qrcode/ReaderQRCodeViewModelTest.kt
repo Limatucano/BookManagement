@@ -3,7 +3,6 @@ package br.com.bookmanagement.presentation.feature.reader.qrcode
 import br.com.bookmanagement.core.BookTest
 import br.com.bookmanagement.domain.model.Books
 import br.com.bookmanagement.domain.usecase.ReaderQRCodeUseCase
-import br.com.bookmanagement.presentation.BookManagementUiState
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -24,8 +23,8 @@ class ReaderQRCodeViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertNotNull((viewModel.readerQRCodeState.value as QRCodeUiState.Success).item)
-        assertEquals(mockBooks, (viewModel.readerQRCodeState.value as QRCodeUiState.Success).item)
+        assertNotNull((viewModel.uiState.value as QRCodeUiState.Success).item)
+        assertEquals(mockBooks, (viewModel.uiState.value as QRCodeUiState.Success).item)
     }
 
     @Test
@@ -35,14 +34,14 @@ class ReaderQRCodeViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerQRCodeState.value is QRCodeUiState.Error)
-        assertEquals(expectedError, (viewModel.readerQRCodeState.value as QRCodeUiState.Error).throwable)
+        assertTrue(viewModel.uiState.value is QRCodeUiState.Error)
+        assertEquals(expectedError, (viewModel.uiState.value as QRCodeUiState.Error).throwable)
     }
 
     @Test
     fun `should set loading state while fetching`() = coTest {
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerQRCodeState.value is QRCodeUiState.Loading)
+        assertTrue(viewModel.uiState.value is QRCodeUiState.Loading)
     }
 }
