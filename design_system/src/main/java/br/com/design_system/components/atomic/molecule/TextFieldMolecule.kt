@@ -1,19 +1,25 @@
 package br.com.design_system.components.atomic.molecule
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.design_system.R
 import br.com.design_system.components.atomic.atom.ErrorMessageAtom
 import br.com.design_system.theme.Typography
 
@@ -37,6 +43,7 @@ fun TextFieldMolecule(
         TextField(
             value = text,
             modifier = modifier
+                .height(60.dp)
                 .fillMaxWidth(),
             onValueChange = onValueChanged,
             visualTransformation = visualTransformation,
@@ -45,7 +52,13 @@ fun TextFieldMolecule(
             trailingIcon = trailingIcon,
             leadingIcon = leadingIcon,
             readOnly = isReadOnly,
+            shape = RoundedCornerShape(40.dp),
             isError = isError,
+            colors = TextFieldDefaults.colors(
+                errorIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+            ),
             label = {
                 Text(
                     text = hint,
@@ -73,6 +86,22 @@ private fun TextFieldMoleculeErrorPreview() {
         isError = true,
         errorMessage = "Campo inválido",
         text = ""
+    )
+}
+
+@Preview
+@Composable
+private fun TextFieldMoleculeSearchPreview() {
+    TextFieldMolecule(
+        hint = "Testando",
+        onValueChanged = {},
+        text = "",
+        trailingIcon = {
+            Image(
+                painter = painterResource(android.R.drawable.ic_menu_search),
+                contentDescription = null
+            )
+        }
     )
 }
 
