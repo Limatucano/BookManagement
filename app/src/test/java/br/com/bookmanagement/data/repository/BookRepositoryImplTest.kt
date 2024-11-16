@@ -10,10 +10,10 @@ import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import org.junit.Test
 
-class BookRepositoryTest : BookTest() {
+class BookRepositoryImplTest : BookTest() {
 
     private val mockBookService = mockk<RemoteDataSourceImpl>()
-    private val repository = BookRepository(mockBookService)
+    private val repository = BookRepositoryImpl(mockBookService)
 
     private val mockBook = BooksDto(
         20,

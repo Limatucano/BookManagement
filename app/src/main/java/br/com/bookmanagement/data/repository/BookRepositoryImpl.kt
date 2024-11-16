@@ -3,7 +3,7 @@ package br.com.bookmanagement.data.repository
 import br.com.bookmanagement.data.remote.datasource.RemoteDataSourceImpl
 import br.com.bookmanagement.data.remote.model.BooksDto
 
-class BookRepository(
+class BookRepositoryImpl(
     private val bookService: RemoteDataSourceImpl
 ) : IBookRepository {
 
