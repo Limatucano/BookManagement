@@ -24,8 +24,8 @@ class ReaderManualViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertNotNull((viewModel.readerManualState.value as BookManagementUiState.Success<*>).item)
-        assertEquals(mockBooks, (viewModel.readerManualState.value as BookManagementUiState.Success<*>).item)
+        assertNotNull((viewModel.uiState.value as BookManagementUiState.Success).item)
+        assertEquals(mockBooks, (viewModel.uiState.value as BookManagementUiState.Success).item)
     }
 
     @Test
@@ -35,14 +35,14 @@ class ReaderManualViewModelTest : BookTest() {
 
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerManualState.value is BookManagementUiState.Error)
-        assertEquals(expectedError, (viewModel.readerManualState.value as BookManagementUiState.Error).trhowable)
+        assertTrue(viewModel.uiState.value is BookManagementUiState.Error)
+        assertEquals(expectedError, (viewModel.uiState.value as BookManagementUiState.Error).throwable)
     }
 
     @Test
     fun `should set loading state while fetching`() = coTest {
         viewModel.fetchData("fetch")
 
-        assertTrue(viewModel.readerManualState.value is BookManagementUiState.Loading)
+        assertTrue(viewModel.uiState.value is BookManagementUiState.Loading)
     }
 }
