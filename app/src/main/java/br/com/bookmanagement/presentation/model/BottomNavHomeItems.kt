@@ -24,5 +24,11 @@ sealed class BottomNavHomeItems : BottomNavItem {
             Home,
             QrCode
         )
+
+        fun contains(route: String?): Boolean {
+            return getAll()
+                .map { it.route }
+                .contains(route)
+        }
     }
 }

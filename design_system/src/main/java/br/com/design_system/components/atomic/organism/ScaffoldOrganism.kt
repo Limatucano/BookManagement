@@ -17,6 +17,8 @@ fun ScaffoldOrganism(
     items: List<BottomNavItem>,
     navController: NavController,
     backgroundColor: Color = Color.Transparent,
+    showBottomNavigation: Boolean,
+    shouldUsePaddingValues: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -25,17 +27,25 @@ fun ScaffoldOrganism(
         containerColor = backgroundColor,
         contentColor = backgroundColor,
         bottomBar = {
-            BottomNavigationOrganism(
-                containerColor = backgroundColor,
-                items = items,
-                navController = navController
-            )
+            if(showBottomNavigation) {
+                BottomNavigationOrganism(
+                    containerColor = backgroundColor,
+                    items = items,
+                    navController = navController
+                )
+            }
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .then(
+                    if(shouldUsePaddingValues){
+                        Modifier.padding(paddingValues)
+                    } else {
+                        Modifier
+                    }
+                )
         ) {
             content()
         }

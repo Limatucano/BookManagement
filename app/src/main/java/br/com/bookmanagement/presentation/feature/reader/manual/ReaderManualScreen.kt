@@ -14,12 +14,7 @@ fun ReaderManualScreen(
     navController: NavController,
     viewModel: ReaderManualViewModel = koinViewModel()
 ) {
-    ScaffoldOrganism(
-        navController = navController,
-        items = BottomNavHomeItems.getAll()
-    ) {
-        Button(onClick = { viewModel.fetchData("Jogos Vorazes") }) {
-            Text(text = "Clique")
-        }
+    Button(onClick = { viewModel.fetchData("Jogos Vorazes") }) {
+        Text(text = "Clique")
     }
 }

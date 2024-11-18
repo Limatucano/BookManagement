@@ -1,47 +1,66 @@
 package br.com.bookmanagement.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import br.com.bookmanagement.presentation.feature.details.DetailsScreen
 import br.com.bookmanagement.presentation.feature.home.HomeScreen
 import br.com.bookmanagement.presentation.feature.reader.manual.ReaderManualScreen
 import br.com.bookmanagement.presentation.feature.reader.qrcode.ReaderQRCodeScreen
 import br.com.bookmanagement.presentation.feature.splash.SplashScreen
+import br.com.bookmanagement.presentation.model.BottomNavHomeItems
+import br.com.design_system.components.atomic.organism.ScaffoldOrganism
+import br.com.design_system.theme.LightTheme
+import br.com.design_system.theme.TransparentTheme
 
 @Composable
 internal fun NavigationGraph(
     navController: NavHostController
 ) {
-    NavHost(
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    ScaffoldOrganism(
         navController = navController,
-        startDestination = BookRoute.HomeScreen.route
+        items = BottomNavHomeItems.getAll(),
+        showBottomNavigation = BottomNavHomeItems.contains(currentRoute),
+        shouldUsePaddingValues = currentRoute != BookRoute.ReaderQRCodeScreen.route
     ) {
-        composable(route = BookRoute.SplashScreen.route) {
-            SplashScreen(navController = navController)
-        }
-
-        composable(
-            route = BookRoute.HomeScreen.route,
-            popEnterTransition = null
+        NavHost(
+            navController = navController,
+            startDestination = BookRoute.HomeScreen.route
         ) {
-            HomeScreen(navController = navController)
-        }
+            composable(route = BookRoute.HomeScreen.route) {
+                LightTheme {
+                    HomeScreen(navController = navController)
+                }
+            }
 
-        composable(route = BookRoute.DetailsScreen.route) {
-            DetailsScreen(navController = navController)
-        }
+            composable(route = BookRoute.DetailsScreen.route) {
+                LightTheme {
+                    DetailsScreen(navController = navController)
+                }
+            }
 
-        composable(route = BookRoute.ReaderQRCodeScreen.route) {
-            ReaderQRCodeScreen(navController = navController)
-        }
+            composable(route = BookRoute.ReaderQRCodeScreen.route) {
+                TransparentTheme {
+                    ReaderQRCodeScreen(navController = navController)
+                }
+            }
 
-        composable(
-            route = BookRoute.ReaderManualScreen.route,
-            popEnterTransition = null
-        ) {
-            ReaderManualScreen(navController = navController)
+            composable(route = BookRoute.SplashScreen.route) {
+                LightTheme {
+                    SplashScreen(navController = navController)
+                }
+            }
+
+            composable(route = BookRoute.ReaderManualScreen.route) {
+                LightTheme {
+                    ReaderManualScreen(navController = navController)
+                }
+            }
         }
     }
 }

@@ -58,6 +58,7 @@ fun ReaderQRCodeScreen(
 
 }
 
+@OptIn(ExperimentalGetImage::class)
 @kotlin.OptIn(ExperimentalPermissionsApi::class)
 @Composable
 private fun OpenQRCode(
@@ -103,20 +104,15 @@ private fun OpenQRCode(
     //Até aqui
 
     if (openQRCodeReader) {
-        ScaffoldOrganism(
-            navController = navController,
-            items = BottomNavHomeItems.getAll()
-        ) {
-            QRCodeReader(
-                hasCameraPermission = cameraPermission.status.isGranted
-            ) { result ->
-                if (result.isNotEmpty() && result != qrCodeResult && !isQRCodeRead) {
-                    viewModel.fetchData(result)
-                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+        QRCodeReader(
+            hasCameraPermission = cameraPermission.status.isGranted
+        ) { result ->
+            if (result.isNotEmpty() && result != qrCodeResult && !isQRCodeRead) {
+                viewModel.fetchData(result)
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
 
-                    isQRCodeRead = true
-                    qrCodeResult = result
-                }
+                isQRCodeRead = true
+                qrCodeResult = result
             }
         }
     }
