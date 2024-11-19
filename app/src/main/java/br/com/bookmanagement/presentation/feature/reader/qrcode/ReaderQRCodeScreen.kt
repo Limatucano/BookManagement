@@ -12,8 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import br.com.bookmanagement.presentation.model.BottomNavHomeItems
+import br.com.design_system.components.atomic.organism.ScaffoldOrganism
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -46,17 +49,22 @@ fun ReaderQRCodeScreen(
         }
 
         is QRCodeUiState.OpenQRCode -> {
-            OpenQRCode(viewModel)
+            OpenQRCode(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
     }
 
 }
 
+@OptIn(ExperimentalGetImage::class)
 @kotlin.OptIn(ExperimentalPermissionsApi::class)
 @Composable
-private fun OpenQRCode(viewModel: ReaderQRCodeViewModel) {
-
-
+private fun OpenQRCode(
+    viewModel: ReaderQRCodeViewModel,
+    navController: NavController
+) {
     var openQRCodeReader by remember {
         mutableStateOf(false)
     }
@@ -97,8 +105,7 @@ private fun OpenQRCode(viewModel: ReaderQRCodeViewModel) {
 
     if (openQRCodeReader) {
         QRCodeReader(
-            hasCameraPermission = cameraPermission.status.isGranted,
-            buttonText = "Ler QRCode"
+            hasCameraPermission = cameraPermission.status.isGranted
         ) { result ->
             if (result.isNotEmpty() && result != qrCodeResult && !isQRCodeRead) {
                 viewModel.fetchData(result)
